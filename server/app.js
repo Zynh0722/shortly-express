@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const utils = require('./lib/hashUtils');
 const partials = require('express-partials');
+const cookieParser = require('./middleware/cookieParser');
 const Auth = require('./middleware/auth');
 const models = require('./models');
 
@@ -9,6 +10,7 @@ const app = express();
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
+app.use(cookieParser);
 app.use(partials());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
