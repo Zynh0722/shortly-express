@@ -86,7 +86,6 @@ app.post('/signup',
   (req, res) => {
     models.Users.create(req.body)
       .then((result) => {
-        console.log(result);
         res.redirect('/');
       })
       .catch((err) => {
@@ -102,7 +101,14 @@ app.get('/login',
 
 app.post('/login',
   (req, res) => {
-    res.render('login');
+    models.Users.get({username: req.body.username})
+      .then((result) => {
+        if (result && models.Users.compare(req.body.password, result.password, result.salt)) {
+          res.redirect('/');
+        } else {
+          res.redirect('/login');
+        }
+      });
   });
 
 /************************************************************/
