@@ -91,7 +91,6 @@ app.post('/signup',
       .catch((err) => {
         res.redirect('/signup');
       });
-
   });
 
 app.get('/login',
