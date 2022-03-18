@@ -107,6 +107,9 @@ app.post('/login',
         } else {
           res.redirect('/login');
         }
+      })
+      .catch((err) => {
+        throw err; // It shouldn't be possible to get here
       });
   });
 
